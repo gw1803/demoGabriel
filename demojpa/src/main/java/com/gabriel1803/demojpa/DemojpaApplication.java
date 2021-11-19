@@ -1,0 +1,18 @@
+package com.gabriel1803.demojpa;
+
+import com.gabriel1803.demojpa.domain.Pessoa;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemojpaApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DemojpaApplication.class, args);
+
+		Pessoa p = new Pessoa();
+		p.setNome("alessio");
+
+		System.out.println("Minha Primeira Aplicação");
+	}
+}
