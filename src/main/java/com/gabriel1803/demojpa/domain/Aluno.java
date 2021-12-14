@@ -6,20 +6,16 @@ import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "table_professsoor")
+@Entity(name = "table_aluno")
 
-public class Professor {
-    @OneToMany
-    @JoinColumn(name="id_Professor")
-    private List<Avaliacao> avalicoes;
-    
+public class Aluno {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long matricula;
     @Column(name = "nome", length = 64, nullable = false)
     private String nome;
     @Column(name = "dataNascimento", nullable = false)
@@ -31,25 +27,15 @@ public class Professor {
     @Column(nullable = false)
     private String cep;
     @Column(nullable = false)
-    private String rua;
-    @Column(nullable = false)
-    private String bairro;
-    @Column(nullable = false)
-    private String cidade;
-    private int numero_avaliacoes;
-    private int numero_roteiros;
-    @Column(nullable = false)
-    private String uf;
+    private String endereco;
     
-
-    @OneToMany(mappedBy = "Professor")
-    private List<Turma> turmas;
-    
-    
-    public static Professor parseNote(String line) {
+    @OneToOne
+    private Avaliacao avaliacao;
+     
+    public static Aluno parseNote(String line) {
         String[] text = line.split(",");
-        Professor note = new Professor();
-        note.setId(Long.parseLong(text[0]));
+        Aluno note = new Aluno();
+        note.setMatricula(Long.parseLong(text[0]));
         note.setNome(text[1]);
         return note;
     }

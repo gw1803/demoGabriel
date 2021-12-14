@@ -14,7 +14,13 @@ import java.util.concurrent.TimeUnit;
 @NoArgsConstructor
 @Entity(name = "table_avaliacao")
 public class Avaliacao {
-    
+
+    @ManyToMany
+    @JoinTable(name="table_Avaliacao_has_Roteiro", joinColumns=
+    {@JoinColumn(name="idAvaliacao")}, inverseJoinColumns=
+    {@JoinColumn(name="idRoteiro")})
+    private List<Roteiro> roteiros;
+
     @OneToMany
     @JoinColumn(name="id_Avaliacao")
     private List<Avaliacao_has_Questao> questoes;
@@ -33,6 +39,9 @@ public class Avaliacao {
 
     @Column(nullable = false)
     private double valorTotal;
+
+    @Column(nullable = false)
+    private double notaTotal;
 
     @Column(nullable = false)
     private TimeUnit  tempo;
