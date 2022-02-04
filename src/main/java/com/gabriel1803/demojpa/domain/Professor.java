@@ -5,12 +5,12 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "table_professsoor")
+@Entity
+@Table(name = "table_professsor")
 
 public class Professor {
     @OneToMany
@@ -23,7 +23,7 @@ public class Professor {
     @Column(name = "nome", length = 64, nullable = false)
     private String nome;
     @Column(name = "dataNascimento", nullable = false)
-    private Instant dataNascimento;
+    private String dataNascimento;
     @Column(nullable = false)
     private String cpf;
     @Column(nullable = false)

@@ -1,6 +1,4 @@
 package com.gabriel1803.demojpa.domain;
-
-import java.util.List;
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -14,10 +12,6 @@ import lombok.NoArgsConstructor;
 
 public class Roteiro {
 
-    @OneToMany
-    @JoinColumn(name="id_roteiro")
-    private List<Questao> questoes;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRoteiro;
@@ -26,9 +20,6 @@ public class Roteiro {
      private String assunto;
     @Column(name = "conteudo", length = 1000, nullable= false)
      private String conteudo;
-    @OneToMany(mappedBy = "Roteiro")
-    private List<Pecas> peca;
-
     
     public static Roteiro parseNote(String line) {
         String[] text = line.split(",");

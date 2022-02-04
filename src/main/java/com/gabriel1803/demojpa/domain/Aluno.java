@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +16,7 @@ public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long matricula;
+    private Long matriculaAluno;
     @Column(name = "nome", length = 64, nullable = false)
     private String nome;
     @Column(name = "dataNascimento", nullable = false)
@@ -28,14 +29,15 @@ public class Aluno {
     private String cep;
     @Column(nullable = false)
     private String endereco;
-    
-    @OneToOne
-    private Avaliacao avaliacao;
+
+    @OneToMany
+    @JoinColumn(name="id_Aluno")
+    private List<QuestaoSorteada> questaoSorteadas;
      
     public static Aluno parseNote(String line) {
         String[] text = line.split(",");
         Aluno note = new Aluno();
-        note.setMatricula(Long.parseLong(text[0]));
+        note.setMatriculaAluno(Long.parseLong(text[0]));
         note.setNome(text[1]);
         return note;
     }

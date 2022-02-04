@@ -1,8 +1,6 @@
 
 package com.gabriel1803.demojpa.domain;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 import lombok.Data;
@@ -16,10 +14,6 @@ import lombok.AllArgsConstructor;
 
 public class Parte {
 
-    @OneToMany
-    @JoinColumn(name="id_Parte")
-    private List<Questao> questoes;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idParte;
@@ -31,11 +25,7 @@ public class Parte {
     @Column(name = "nome", length = 45,nullable= false)
     private String nome;
     
-    @ManyToOne
-    private Pecas Pecas;
-    @ManyToOne
-    private Roteiro Roteiro;
-    
+    private int idPeca;
    
     public static Parte parseNote(String line) {
         String[] text = line.split(",");

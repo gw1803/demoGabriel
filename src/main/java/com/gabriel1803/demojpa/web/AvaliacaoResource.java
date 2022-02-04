@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/avaliacoes")
+@CrossOrigin(origins = "*")
 public class AvaliacaoResource {
     private final Logger log = LoggerFactory.getLogger(AvaliacaoResource.class);
 
@@ -26,7 +27,7 @@ public class AvaliacaoResource {
     }
 
     /**
-     * {@code GET  /avaliacaoes/:id} : get the "id" avaliacao.
+     * {@code GET  /avaliacoes/:id} : get the "id" avaliacao.
      *
      * @param id o id da avaliacao que será buscada.
      * @return o {@link ResponseEntity} com status {@code 200 (OK)} e no body a avaliacao, ou com status {@code 404 (Not Found)}.
@@ -65,7 +66,7 @@ public class AvaliacaoResource {
     @PutMapping("/")
     public ResponseEntity<Avaliacao> updateAvaliacao(@RequestBody Avaliacao avaliacao) throws URISyntaxException {
         log.debug("REST request to update Avaliacao : {}", avaliacao);
-        if (avaliacao.getId() == null) {
+        if (avaliacao.getIdAvaliacao() == null) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Invalid Avaliacao id null");
         }
@@ -84,12 +85,12 @@ public class AvaliacaoResource {
     @PostMapping("/")
     public ResponseEntity<Avaliacao> createAvaliacao(@RequestBody Avaliacao avaliacao) throws URISyntaxException {
         log.debug("REST request to save Avaliacao : {}", avaliacao);
-        if (avaliacao.getId() != null) {
+        if (avaliacao.getIdAvaliacao() != null) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Um novo avaliacao não pode terum ID");
         }
         Avaliacao result = avaliacaoService.save(avaliacao);
-        return ResponseEntity.created(new URI("/api/avaliacoes/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/avaliacoes/" + result.getIdAvaliacao()))
                 .body(result);
     }
 
